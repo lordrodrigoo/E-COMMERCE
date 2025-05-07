@@ -1,0 +1,35 @@
+# Ambiente virtual
+venv/
+env/
+ENV/
+.venv/
+*.py[cod]
+__pycache__/
+
+# Arquivos do Django
+*.sqlite3
+*.log
+db.sqlite3
+/media/
+staticfiles/
+
+# Configurações locais
+*.env
+.env.*
+.envrc
+
+# Arquivos de migração gerados automaticamente (opcional manter!)
+**/migrations/*.py
+!**/migrations/__init__.py
+
+# Cache do VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# MacOS
+.DS_Store
+
+# Arquivos do sistema
+Thumbs.db
