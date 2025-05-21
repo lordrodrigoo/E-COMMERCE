@@ -9,7 +9,7 @@ import re
 
 class Perfil(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Usuário')
-    idade = models.PositiveIntegerField(max_length=2, verbose_name='Idade')
+    idade = models.PositiveIntegerField(verbose_name='Idade')
     data_nascimento = models.DateField()
     cpf = models.CharField(max_length=11, verbose_name='CPF')
     endereco = models.CharField(max_length=50, verbose_name='Endereço')
