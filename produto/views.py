@@ -5,6 +5,7 @@ from django.views import View
 from django.http import HttpResponse
 from django.contrib import messages
 from . import models
+from django.db.models import Q
 from perfil.models import Perfil
 
 # Create your views here.
@@ -15,6 +16,25 @@ class ListaProdutos(ListView):
     context_object_name = 'produtos'
     paginate_by = 10
     ordering = ['-id']
+
+class Busca(ListaProdutos):
+    def get_queryset(self, *args, **kwargs):
+        termo = self.request.GET.get('termo') or self.request.session['termo']
+        qs =  super().get_queryset(*args, **kwargs)
+
+        if not termo:
+            return qs
+        
+        self.request.session['termo'] = termo
+        
+        qs = qs.filter(
+            Q(nome__icontains=termo) |
+            Q(descricao_curta__icontains=termo) |
+            Q(descricao_longa__icontains=termo) 
+        )
+        self.request.session.save()
+
+        return qs
 
 class DetalheProduto(DetailView):
     model = models.Produto
